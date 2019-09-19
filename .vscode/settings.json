@@ -1,0 +1,20 @@
+{
+    "python.pythonPath": "venv\\Scripts\\python.exe",
+
+	// Django 에서 사용되는 파일타입을 정의한다. 
+    "files.associations": {
+        "**/templates/*.html": "django-html",
+        "**/templates/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+
+    // django-html 에서도 html emmet 을 적용 시킨다.
+	"emmet.includeLanguages": {
+	    "django-html": "html"
+	},
+	
+	// django-html 에서도 tab size 를 2칸으로 고정한다.
+	"[django-html]": {
+	    "editor.tabSize": 2
+	},
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Artcle Detail {{ article.pk }}</title>
+</head>
+<body>
+  <h1>{{ article.title }}</h1>
+  <p>작성일자: {{ article.created_at }}</p>
+  <hr>
+  <p>{{ article.content }}</p>
+  <a href="/articles/">[뒤로가기]</a>
+  <a href="/articles/delete/{{ article.pk }}/" onclick="return confirm('Are you sure?')">[삭제하기]</a>
+</body>
+</html>
