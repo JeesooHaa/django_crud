@@ -6,7 +6,7 @@ app_name = 'articles'
 urlpatterns = [
     path('', views.index, name='index'),
     path('<int:article_pk>/', views.detail, name='detail'),  # url 에 이름 짓기 
-    path('delete/<int:article_pk>/', views.delete, name='delete'),  
-    path('new/', views.new, name='new'),
+    path('<int:article_pk>/delete/', views.delete, name='delete'),  
     path('create/', views.create, name='create'),  # mapping
+    path('<int:article_pk>/edit/', views.edit, name='edit'),
 ]
