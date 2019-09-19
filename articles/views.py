@@ -9,6 +9,7 @@ def index(request):
     context = {
         'articles': articles,
     }
+    # render 는 url 과 상관없다. 
     return render(request, 'articles/index.html', context)
 
 
@@ -24,7 +25,9 @@ def detail(request, article_pk):
 def delete(request, article_pk):
     article = Article.objects.get(pk=article_pk)
     article.delete()
-    return redirect('/articles/')
+    # redirect 는 url 과 상관있다.
+    # 다른 app 과 name 이 중복되면?  
+    return redirect('articles:index')
 
 
 # 입력 페이지 제공 
@@ -44,4 +47,6 @@ def create(request):
     article.save()
 
     # 작성 후 상세페이지 바로가기 
-    return redirect(f'/articles/{article.pk}/')
+    # : 뒤에 띄어쓰지 말것 
+    return redirect('articles:index')
+    # return redirect('articles:detail', article.pk )
