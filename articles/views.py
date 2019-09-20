@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Article
+from .models import Article, Comment
 
 
 # articles 의 메인 페이지, article list 를 보여 줌 
@@ -16,8 +16,10 @@ def index(request):
 def detail(request, article_pk):
     # SELECT * FROM articles WHERE pk = article_pk
     article = get_object_or_404(Article, pk=article_pk)
+    comments = article.comment_set.all()
     context = {
         'article': article,
+        'comments': comments,
     }
     return render(request, 'articles/detail.html', context)
 
@@ -83,3 +85,23 @@ def selected(request):
         article = Article(pk=chk)
         article.delete()
     return redirect('articles:index')
+
+
+def comments_create(request, article_pk):
+    # article_pk 에 해당하는 article 에 새로운 comment 생성
+    # 생성한 다음 article detail page 로 redirect
+    article = get_object_or_404(Article, pk=article_pk)
+    # POST 요청일 때만 가능하게 
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        comment = Comment()
+        comment.content = content
+        comment.article = article
+        comment.save()
+    return redirect('articles:detail', article.pk)
+
+
+def comments_delete(request, article_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    comment.delete()
+    return redirect('articles:detail', article_pk)
