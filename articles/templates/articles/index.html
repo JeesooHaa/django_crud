@@ -6,11 +6,17 @@
   <h1>Articles</h1>
   <a href="{% url 'articles:create' %}">[작성하기]</a>
   <hr>
-  {% for article in articles %}
-  <br>
-  <div>
-    <h3><a href="{% url 'articles:detail' article.pk %}">{{ article.pk }}. {{ article.title }}</a></h3>
-    <p>{{ article.content }}</p>
-  </div>
-  {% endfor %}
+  <form action="{% url 'articles:selected' %}" method="POST">
+    {% csrf_token %}
+    {% for article in articles %}
+    <br>
+    <div>
+      <h3><a href="{% url 'articles:detail' article.pk %}">{{ article.pk }}. {{ article.title }}</a></h3>
+      <p>{{ article.content }}</p>
+      <input type="checkbox" name="chk" value="{{ article.pk }}">
+    </div>
+    {% endfor %}
+    <br>
+    <button type="submit">선택 글 삭제하기</button>
+  </form>
 {% endblock body %}

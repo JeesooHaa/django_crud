@@ -75,3 +75,11 @@ def edit(request, article_pk):
             'article': article,
         }
         return render(request, 'articles/edit.html', context)
+
+
+def selected(request):
+    chks = request.POST.getlist('chk')
+    for chk in chks:
+        article = Article(pk=chk)
+        article.delete()
+    return redirect('articles:index')

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}이름 입력{% endblock title %}
+
+{% block body %}
+  <h1>이름 입력</h1>
+  <form action="{% url 'jobs:past_job' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="name"><br><br>
+    <button type="submit">생성하기</button>
+  </form>
+{% endblock body %}

@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:article_pk>/delete/', views.delete, name='delete'),  
     path('create/', views.create, name='create'),  # mapping
     path('<int:article_pk>/edit/', views.edit, name='edit'),
+    path('selected/', views.selected, name='selected'), 
 ]

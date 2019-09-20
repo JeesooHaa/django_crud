@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     # articles 로 들어왔다면 articles/urls.py 로 이동해
     path('articles/', include('articles.urls')),
+    path('jobs/', include('jobs.urls')),
     path('admin/', admin.site.urls),
 ]
