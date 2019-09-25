@@ -6,6 +6,9 @@
   <h1>{{ article.title }}</h1>
   <p>작성일자: {{ article.created_at }}</p>
   <hr>
+  {% if article.image %}
+  <img src="{{ article.image.url }}" alt="{{ article.image }}">
+  {% endif %}
   <p>{{ article.content }}</p>
   <form action="{% url 'articles:edit' article.pk %}">
     {% csrf_token %}

@@ -46,12 +46,9 @@ def create(request):
         # POST 로 바뀌었으니 더 이상 GET 이 아니다! 
         title = request.POST.get('title')
         content = request.POST.get('content')
-
-        article = Article()
-        article.title = title
-        article.content = content
+        image = request.FILES.get('image')
+        article = Article(title=title, content=content, image=image)
         article.save()
-
         # 작성 후 상세페이지 바로가기 
         # : 뒤에 띄어쓰지 말것 
         return redirect('articles:index')
@@ -66,11 +63,12 @@ def edit(request, article_pk):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
-
+        image = request.FILES.get('image')
+        if image:
+            article.image = image
         article.title = title
         article.content = content
         article.save()
-
         return redirect('articles:detail', article.pk)
     else:
         context = {

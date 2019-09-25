@@ -5,10 +5,12 @@
 {% block body %}
   <h1>New Article</h1>
   {% comment %} method default = GET {% endcomment %}
-  <form action="{% url 'articles:create' %}" method="POST">
+  <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="text" name="title"><br><br>
     <textarea name="content" cols="30" rows="10"></textarea><br><br>
+    <label for="image">이미지:</label>
+    <input type="file" name="image" id="image" accept="image/*"><br><br>
     <button type="submit">생성하기</button>
   </form>
   <a href="{% url 'articles:index' %}">[뒤로가기]</a>
