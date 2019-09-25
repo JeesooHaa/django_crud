@@ -7,13 +7,14 @@
   {% if article.image %}
   <img src="{{ article.image.url }}" alt="{{ article.image }}">
   {% endif %}
-  <form action="{% url 'articles:edit' article.pk %}" method="POST" ecntype="multipart/form-data">
+  {% comment %} 오타주의 {% endcomment %}
+  <form action="{% url 'articles:edit' article.pk %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="text" name="title" value="{{ article.title }}"><br><br>
     <textarea name="content" cols="30" rows="10">{{ article.content }}</textarea><br><br>
     {% comment %} 파일을 value로 미리 값을 넣지 못함 {% endcomment %}
     <label for="image">이미지: </label>
-    <input type="file" name="image" id="image"><br><br>
+    <input type="file" name="image" id="image" accept="image/*"><br><br>
     <button type="submit">수정하기</button>
   </form>
   <a href="{% url 'articles:detail' article.pk %}">[뒤로가기]</a>

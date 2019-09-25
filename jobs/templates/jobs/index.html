@@ -4,9 +4,11 @@
 
 {% block body %}
   <h1>이름 입력</h1>
-  <form action="{% url 'jobs:past_job' %}" method="POST">
+  <form action="{% url 'jobs:past_job' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="text" name="name"><br><br>
+    <label for="image">이미지:</label>
+    <input type="file" name="image" id="image" accept="image/*"><br><br>
     <button type="submit">생성하기</button>
   </form>
 {% endblock body %}

@@ -14,15 +14,22 @@ def index(request):
 def past_job(request):
     fake = Faker()
     name = request.POST.get('name')
+    image = request.FILES.get('image')
+    # if image == None:
+    #     image = '사진을 넣어주세요'
     
     # Job.objects.filter(name=name).first()
 
     if Job.objects.filter(name=name):
         job = Job.objects.get(name=name)
+        if job.profile_image == '':
+            job.profile_image = image
+            job.save()
     else:
         job = Job()
         job.name = name
         job.past_job = fake.job()
+        job.profile_image = image
         job.save()
     url = Url + job.past_job
     data = requests.get(url).json()

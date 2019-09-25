@@ -5,4 +5,7 @@
 {% block body %}
   <h1>{{ job.past_job }}</h1>
   <h2><img src="{{ data }}" alt=""></h2>
+  {% if job.profile_image %}
+    <img src="{{ job.profile_image.url }}" alt="{{ job.profile_image }}">
+  {% endif %}
 {% endblock body %}
