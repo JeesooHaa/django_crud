@@ -16,7 +16,7 @@ def index(request):
 def detail(request, article_pk):
     # SELECT * FROM articles WHERE pk = article_pk
     article = get_object_or_404(Article, pk=article_pk)
-    comments = article.comment_set.all()
+    comments = article.comments.all()
     context = {
         'article': article,
         'comments': comments,
@@ -97,11 +97,18 @@ def comments_create(request, article_pk):
         comment = Comment()
         comment.content = content
         comment.article = article
+        # comment.article_id = article_pk 
         comment.save()
     return redirect('articles:detail', article.pk)
 
+    # article = comment.article 로 해당 article 을 가져올수있음
+    # article.comment_set.all() artcle 에 달려있는 comment 들을 가져올수있음  
 
-def comments_delete(request, article_pk, comment_pk):
-    comment = Comment.objects.get(pk=comment_pk)
-    comment.delete()
+
+def comments_delete(request, comment_pk):
+    # comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.method == 'POST':
+        comment = Comment.objects.get(pk=comment_pk)
+        article_pk = comment.article_id
+        comment.delete()
     return redirect('articles:detail', article_pk)
