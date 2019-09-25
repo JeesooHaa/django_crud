@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.processors import Thumbnail
+from imagekit.models import ImageSpecField
 
 
 class Article(models.Model):
@@ -9,6 +11,12 @@ class Article(models.Model):
     # null: DB와 관련되어 있다. (DB 에 Null 로 저장할건지에 대한 여부 확인)
     # django 에서 textfiled 는 '' 
     image = models.ImageField(blank=True)  # chr 형식으로 들어감 그래서 null True 삭제 / 비어있는 str 이 들어가 있는 상태 
+    image_thumbnail = ImageSpecField(
+        source='image',
+        processors=[Thumbnail(50, 50)],
+        format='JPEG',
+        options={'quality': 90},
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

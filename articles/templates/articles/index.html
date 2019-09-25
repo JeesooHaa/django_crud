@@ -16,6 +16,9 @@
     {% for article in articles %}
     <br>
     <div>
+      {% if article.image %}
+        <img src="{{ article.image_thumbnail.url }}" alt="{{ article.image }}">
+      {% endif %}
       <h3><a href="{% url 'articles:detail' article.pk %}">{{ article.pk }}. {{ article.title }}</a></h3>
       <p>{{ article.content }}</p>
       <input type="checkbox" name="chk" value="{{ article.pk }}">
